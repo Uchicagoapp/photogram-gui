@@ -54,4 +54,29 @@ class PhotosController < ApplicationController
     redirect_to("/photos/" + a_new_photo.id.to_s )
   end
 
+  def update 
+
+    #Parameters: {"input_image"=>"https://www.chicagobooth.edu/-/media/project/archive/chicago-booth-harper-center.jpg?
+    #cx=0&cy=0&cw=940&ch=749&hash=FD1C6BA4E9C72356C41A7F8F8DBEE3E5", "input_caption"=>"Heyoo", "modify_id"=>"952"}
+
+    the_id = params.fetch("modify_id")
+    
+    matching_photos = Photo.where({ :id => the_id})
+
+    the_photo = matching_photos.at(0)
+
+    input_image = params.fetch("input_image")
+    input_caption = params.fetch("input_caption")
+
+    the_photo.image = input_image
+    the_photo.caption = input_caption 
+
+    the_photo.save 
+    
+    redirect_to("/photos/" + the_photo.id.to_s)
+
+    #render ({ :template => "photo_templates/update.html.erb" })
+  end
+
+
 end
