@@ -18,5 +18,20 @@ def show
   render({ :template => "user_templates/show.html.erb" })
 end
 
+def new_user
+
+  new_user = params.fetch("input_username")
+  @new_id = new_user 
+
+  a_new_user = User.new 
+
+  a_new_user.username = new_user 
+
+  a_new_user.save 
+
+  
+  render({ :template => "user_templates/add.html.erb" })
+end
+
 
 end
